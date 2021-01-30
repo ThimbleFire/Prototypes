@@ -11,11 +11,38 @@ Class Item
         BuildItem();   
     }
 	
-	public void Random(int tier) {
+	public void Randomize(int tier) {
 	
-			int ItemType = Random.Range(0, Binary.ToBinary(Enum.GetNames(typeof(ItemType)).Length - 1));
-			int ItemTypeIndex = Random.Range(0, Binary.ToBinary(Enum.GetNames(typeof(ItemType)).Length - 1));
-			int Tier = Random.Range(0, Binary.ToBinary(tier));
+		//item type count - Get the number of item types
+		int itc = Enum.GetNames(typeof(ItemType)).Length - 1;
+		
+		//random item type count - Get a random item type
+		int ritc = Random.Range(0, itc);
+		
+		//to binary item type - Convert the random item type to binary
+		int tbit = Binary.ToBinary(ritc);
+		
+		//item type index count
+		int itic = 0;
+		
+		//getting the max length of the random item type
+		switch(ritc) {
+		
+			case ItemType.WEAPON: itic = Enum.GetNames(typeof(Weapon)).Length - 1; break;
+			case ItemType.POTION: itic = Enum.GetNames(typeof(Potion)).Length - 1; break;
+		}
+		
+		//randomizing the random item type using the max length
+		int tditi = Random.Range(0, itic);
+		
+		//converting the randomized item type index to binary
+		int rbiti = Binary.ToBinary(tditi);
+		
+		//converting the given decimal value to binary
+		int binaryTier = Binary.ToBinary(tier);
+		
+		//set the raw item data and build the item.
+		SetItem(tbit + rbiti + binaryTier);
 	}
 
     private void BuildItem() {
