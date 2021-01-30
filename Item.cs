@@ -41,8 +41,8 @@ Class Item
 		//converting the given decimal value to binary
 		int binaryTier = Binary.ToBinary(tier);
 		
-		//set the raw item data and build the item.
-		SetItem(tbit + rbiti + binaryTier);
+		//set the raw item data.
+		rawData = tbit + rbiti + binaryTier;
 	}
 
     private void BuildItem() {
@@ -69,14 +69,32 @@ Class Item
 
     enum Weapon {
     
-        SHORTSWORD,
+        ARMING_SWORD
         LONGSWORD,
-        GREATSWORD
+        GREATSWORD,
+        HATCHET,
+        BATTLEAXE,
+        GREATAXE,
+        HAMMER,
+        MAUL,
+        WARHAMMER,
+        FLAIL,
+        WHIP,
+        SICKLE,
+        HALBERD,
+        HASTA,
+        SPEAR,
+        SCIMITAR,
+        KATANA
     }
 
     enum Potion {
     
+        MINOR_HEALING
         LESSER_HEALING,
+        HEALING,
+        GREATER_HEALING,
+        SUPER_HEALING
         LESSER_MAGIC
     }
 }
