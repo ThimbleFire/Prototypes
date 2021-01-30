@@ -2,54 +2,54 @@ using System;
 
 Class Item
 {
+    // The item in binary form
     public string rawData;
 
-    public void SetItem(string RawData)
-    {
+    public void SetItem(string RawData) {
+    
         this.rawData = RawData;
         BuildItem();   
     }
+	
+	public void Random(int tier) {
+	
+			int ItemType = Random.Range(0, Binary.ToBinary(Enum.GetNames(typeof(ItemType)).Length - 1));
+			int ItemTypeIndex = Random.Range(0, Binary.ToBinary(Enum.GetNames(typeof(ItemType)).Length - 1));
+			int Tier = Random.Range(0, Binary.ToBinary(tier));
+	}
 
-    private void BuildItem()
-    {
-        element = Binary.Convert(rawData, 0);
-        itemType = Binary.Convert(rawData, 1);
-        itemTypeIndex = Binary.Convert(rawData, 2);
+    private void BuildItem() {
+    
+        itemType = Binary.ToDecimal(rawData, 0);
+        itemTypeIndex = Binary.ToDecimal(rawData, 1);
+        tier = Binary.ToDecimal(rawData, 2);
     }
-
-    public string void GetItem()
-    {
-        return string.Empty;
-    }
-
-    Elements GetElement(byte i) { get { return this.element; } }
-    enum Elements
-    {
-        ITEM_TYPE,
-        TYPE_SPECIFIC,
-    } Elements element;
 
     ItemType GetItemType(byte i) { get { return this.itemType; } }
-    enum ItemType
-    {
+    enum ItemType {
+    
         WEAPON,
         POTION
     } ItemType itemType;
 
     //itemTypeIndex is the index of the dedicated item type. So if the item type is of type weapon
-    //and itemTypeIndex = 0, then itemType equals SHORTSWORD == 
+    //and itemTypeIndex = 0, then itemType equals SHORTSWORD
     byte itemTypeIndex = 0;
+    
+    //Items of all type can drop at any time. How good those items are comes down to tier and other properties.
+    //Chance of getting higher tier items increase as the player gets further through the game.
+    byte tier = 0;
 
-    enum Weapon
-    {
+    enum Weapon {
+    
         SHORTSWORD,
         LONGSWORD,
         GREATSWORD
     }
 
-    enum Potion
-    {
+    enum Potion {
+    
         LESSER_HEALING,
-        LESSER_MAGIC,
+        LESSER_MAGIC
     }
 }
